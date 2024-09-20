@@ -1,0 +1,176 @@
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [gender, setGender] = useState("male");
+  const [subject, setSubject] = useState({
+    english: true,
+    maths: false,
+    physics: false,
+  });
+  const [resume, setResume] = useState("");
+  const [url, setUrl] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [about, setAbout] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      firstName,
+      email,
+      contact,
+      gender,
+      subject,
+      resume,
+      url,
+      selectedOption,
+      about
+    );
+    // Handle form submission logic
+  };
+
+  const handleSubjectChange = (sub) => {
+    setSubject((prev) => ({
+      ...prev,
+      [sub]: !prev[sub],
+    }));
+  };
+
+  const handleReset = () => {
+    setFirstName("");
+    setEmail("");
+    setContact("");
+    setGender("male");
+    setSubject({
+      english: true,
+      maths: false,
+      physics: false,
+    });
+    setResume("");
+    setUrl("");
+    setSelectedOption("");
+    setAbout("");
+  };
+
+  return (
+    <div className="App">
+      <h1>Form Submission</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>First Name:</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Contact Number:</label>
+          <input
+            type="text"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Gender:</label>
+          <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Subjects:</label>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={subject.english}
+                onChange={() => handleSubjectChange("english")}
+              />
+              English
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={subject.maths}
+                onChange={() => handleSubjectChange("maths")}
+              />
+              Maths
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={subject.physics}
+                onChange={() => handleSubjectChange("physics")}
+              />
+              Physics
+            </label>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label>Resume:</label>
+          <input
+            type="file"
+            onChange={(e) => setResume(e.target.files[0])}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>URL:</label>
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Options:</label>
+          <select
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+          >
+            <option value="">Select an option</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>About:</label>
+          <textarea
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <button type="submit">Submit</button>
+          <button type="button" onClick={handleReset}>Reset</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
